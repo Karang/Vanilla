@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import org.spout.api.component.Component;
+import org.spout.api.component.BaseComponent;
 import org.spout.api.entity.Player;
 import org.spout.api.geo.LoadOption;
 import org.spout.api.geo.World;
@@ -41,7 +41,7 @@ import org.spout.api.math.MathHelper;
 import org.spout.vanilla.components.substance.Lightning;
 import org.spout.vanilla.data.Weather;
 
-public class LightningSimulator extends Component {
+public class LightningSimulator extends BaseComponent {
 	private static final int MAX_LIGHTNING_BRANCHES = 5;
 	private static Random ra = new Random();
 	final WeatherSimulator weather;

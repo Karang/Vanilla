@@ -26,7 +26,7 @@
  */
 package org.spout.vanilla.components.misc;
 
-import org.spout.api.component.Component;
+import org.spout.api.component.BaseComponent;
 import org.spout.api.data.Data;
 import org.spout.api.entity.Player;
 import org.spout.api.inventory.ItemStack;
@@ -38,7 +38,7 @@ import org.spout.vanilla.inventory.player.PlayerInventory;
 /**
  * Component that holds inventory references and handles inventory transactions.
  */
-public class InventoryComponent extends Component implements InventoryOwner {
+public class InventoryComponent extends BaseComponent implements InventoryOwner {
 	
 	private PlayerInventory inventory;
 	@Override

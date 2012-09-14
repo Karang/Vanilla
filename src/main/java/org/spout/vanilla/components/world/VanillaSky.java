@@ -28,7 +28,7 @@ package org.spout.vanilla.components.world;
 
 import java.util.HashMap;
 
-import org.spout.api.component.Component;
+import org.spout.api.component.BaseComponent;
 import org.spout.api.geo.World;
 
 import org.spout.vanilla.data.Weather;
@@ -37,7 +37,7 @@ import org.spout.vanilla.world.WeatherSimulator;
 /**
  * Represents a sky in Vanilla
  */
-public abstract class VanillaSky extends Component {
+public abstract class VanillaSky extends BaseComponent {
 	public static final byte MIN_SKY_LIGHT = 4;
 	public static final byte MAX_SKY_LIGHT = 15;
 	public static final byte SKY_LIGHT_RANGE = MAX_SKY_LIGHT - MIN_SKY_LIGHT;
