@@ -26,8 +26,10 @@
  */
 package org.spout.vanilla.component.living;
 
+import org.spout.api.Spout;
 import org.spout.api.component.components.EntityComponent;
 import org.spout.api.entity.Entity;
+import org.spout.api.entity.Player;
 
 import org.spout.vanilla.component.misc.HeadComponent;
 import org.spout.vanilla.component.misc.HealthComponent;
@@ -40,6 +42,13 @@ public abstract class VanillaEntity extends EntityComponent {
 		holder.add(HeadComponent.class);
 		holder.add(HealthComponent.class);
 		holder.add(VanillaPhysicsComponent.class);
+	}
+
+	@Override
+	public void onTick(float dt) {
+		if (getHolder().getTransform().isDirty() && !(getHolder() instanceof Player)) {
+			Spout.log(toString() + " is moving. Transform: " + getHolder().getTransform().getTransform().toString());
+		}
 	}
 
 	public HeadComponent getHead() {

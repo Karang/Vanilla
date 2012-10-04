@@ -26,9 +26,17 @@
  */
 package org.spout.vanilla.component.living.hostile;
 
+import javax.vecmath.Vector3f;
+
+import com.bulletphysics.collision.shapes.BoxShape;
+import com.bulletphysics.dynamics.RigidBody;
+
+import org.spout.api.math.MathHelper;
+
 import org.spout.vanilla.VanillaPlugin;
 import org.spout.vanilla.component.living.Hostile;
 import org.spout.vanilla.component.living.VanillaEntity;
+import org.spout.vanilla.component.misc.VanillaPhysicsComponent;
 import org.spout.vanilla.protocol.entity.living.EnderDragonEntityProtocol;
 
 /**
@@ -39,5 +47,11 @@ public class EnderDragon extends VanillaEntity implements Hostile {
 	public void onAttached() {
 		super.onAttached();
 		getHolder().getNetwork().setEntityProtocol(VanillaPlugin.VANILLA_PROTOCOL_ID, new EnderDragonEntityProtocol());
+		VanillaPhysicsComponent physics = getHolder().add(VanillaPhysicsComponent.class);
+		physics.setCollisionShape(new BoxShape(MathHelper.toVector3f(10f, 5f, 10f)));
+		physics.setMass(50f);
+		Vector3f inertia = new Vector3f();
+		physics.getCollisionShape().calculateLocalInertia(physics.getMass(), inertia);
+		physics.setCollisionObject(new RigidBody(physics.getMass(), physics.getMotionState(), physics.getCollisionShape(), inertia));
 	}
 }

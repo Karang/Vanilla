@@ -26,11 +26,18 @@
  */
 package org.spout.vanilla.component.substance;
 
+import javax.vecmath.Vector3f;
+
+import com.bulletphysics.collision.shapes.BoxShape;
+import com.bulletphysics.dynamics.RigidBody;
+
 import org.spout.api.data.Data;
 import org.spout.api.inventory.ItemStack;
+import org.spout.api.math.MathHelper;
 
 import org.spout.vanilla.VanillaPlugin;
 import org.spout.vanilla.component.living.VanillaEntity;
+import org.spout.vanilla.component.misc.VanillaPhysicsComponent;
 import org.spout.vanilla.data.VanillaData;
 import org.spout.vanilla.protocol.entity.object.ItemEntityProtocol;
 
@@ -38,6 +45,12 @@ public class Item extends VanillaEntity {
 	@Override
 	public void onAttached() {
 		getHolder().getNetwork().setEntityProtocol(VanillaPlugin.VANILLA_PROTOCOL_ID, new ItemEntityProtocol());
+		VanillaPhysicsComponent physics = getHolder().add(VanillaPhysicsComponent.class);
+		physics.setCollisionShape(new BoxShape(MathHelper.toVector3f(0.1f, 0.1f, 0.1f)));
+		physics.setMass(0.1f);
+		Vector3f inertia = new Vector3f();
+		physics.getCollisionShape().calculateLocalInertia(physics.getMass(), inertia);
+		physics.setCollisionObject(new RigidBody(physics.getMass(), physics.getMotionState(), physics.getCollisionShape(), inertia));
 	}
 
 	@Override
