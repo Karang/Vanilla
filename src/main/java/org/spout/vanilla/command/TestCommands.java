@@ -50,6 +50,7 @@ import org.spout.api.material.Material;
 import org.spout.api.material.MaterialRegistry;
 import org.spout.api.plugin.Platform;
 import org.spout.api.protocol.NetworkSynchronizer;
+import org.spout.api.util.BlockIterator;
 
 import org.spout.vanilla.VanillaPlugin;
 import org.spout.vanilla.component.inventory.window.block.BrewingStandWindow;
@@ -101,8 +102,15 @@ public class TestCommands {
 			player = ((Client)Spout.getEngine()).getActivePlayer();
 		}
 		
-		for (Block b : player.get(HitBlockComponent.class).getAlignedBlocks()) {
-			b.setMaterial(VanillaMaterials.STONE);
+		BlockIterator blockIt = player.get(HitBlockComponent.class).getAlignedBlocks();
+		
+		Block block = null;
+		while (blockIt.hasNext()) {
+			block = blockIt.next();
+			if (block.getMaterial().isPlacementObstacle()) {
+				break;
+			}
+			block.setMaterial(VanillaMaterials.STONE);
 		}
 	}
 	
