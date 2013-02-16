@@ -37,6 +37,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import org.spout.api.Spout;
+import org.spout.api.Client;
 import org.spout.api.entity.Player;
 import org.spout.api.geo.World;
 import org.spout.api.geo.discrete.Point;
@@ -73,11 +75,12 @@ public final class PlayerPositionHandler extends MessageHandler<PlayerPositionMe
 		if (!session.hasPlayer()) {
 			return;
 		}
+		
 		Player player = session.getPlayer();
 		
 		World world = session.getEngine().getDefaultWorld();
 		player.getScene().setPosition(new Point(world, (float)message.getX(), (float)message.getY(), (float)message.getZ()));
-		// TODO: player position isnt updated
+		
 		System.out.println(message.toString());
 	}
 

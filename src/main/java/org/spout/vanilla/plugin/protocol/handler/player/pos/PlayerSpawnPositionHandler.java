@@ -29,6 +29,7 @@ package org.spout.vanilla.plugin.protocol.handler.player.pos;
 import org.spout.api.entity.Player;
 import org.spout.api.geo.World;
 import org.spout.api.geo.discrete.Point;
+import org.spout.api.geo.discrete.Transform;
 import org.spout.api.protocol.MessageHandler;
 import org.spout.api.protocol.Session;
 
@@ -40,10 +41,14 @@ public final class PlayerSpawnPositionHandler extends MessageHandler<PlayerSpawn
 		if (!session.hasPlayer()) {
 			return;
 		}
-		Player player = session.getPlayer();
 		
+		Player player = session.getPlayer();
 		World world = player.getWorld();
-		player.getScene().setPosition(new Point(world, message.getX(), message.getY(), message.getZ()));
+			
+		Transform ts = player.getScene().getTransform();
+		ts.setPosition(new Point(world, message.getX(), message.getY(), message.getZ()));
+		player.getScene().setTransform(ts);
+			
 		System.out.println(message.toString());
 	}
 }

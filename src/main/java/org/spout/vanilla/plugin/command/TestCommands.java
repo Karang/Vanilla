@@ -113,7 +113,7 @@ public class TestCommands {
 
 	// TODO - There needs to be a method that guarantees unique data values on a per-server basis
 	private int mapId = 1;
-
+	
 	@Command(aliases = "map", usage = "", desc = "Creates a map", max = 0)
 	@CommandPermissions("vanilla.command.debug")
 	public void map(CommandContext args, CommandSource source) throws CommandException {
